@@ -7,8 +7,8 @@ void main()
 	char st1[200000]="";
 	in.getline(st1, 200000);
 	setlocale(LC_ALL, "Russian");
-	coder("test1.bmp", "outputtt.bmp", st1);//имя картинки входной, имя картинки выходной, сообщение
-	decoder("test1.bmp", "outputtt.bmp");//имя картинки входной, имя картинки выходной
+	coder("test1.bmp", "outputtt.bmp", st1););//РёРјСЏ РєР°СЂС‚РёРЅРєРё РІС…РѕРґРЅРѕР№, РёРјСЏ РєР°СЂС‚РёРЅРєРё РІС‹С…РѕРґРЅРѕР№, СЃРѕРѕР±С‰РµРЅРёРµ
+	decoder("test1.bmp", "outputtt.bmp");");//РёРјСЏ РєР°СЂС‚РёРЅРєРё РІС…РѕРґРЅРѕР№, РёРјСЏ РєР°СЂС‚РёРЅРєРё РІС‹С…РѕРґРЅРѕР№
 	system("pause");
 	in.close();
 	// return 0;
@@ -30,7 +30,7 @@ void readParams(ifstream &os) {
 	os.read(reinterpret_cast<char*>(settings.resolution), sizeof(settings.resolution));
 	os.read(reinterpret_cast<char*>(&settings.pltColors), sizeof(settings.pltColors));
 	os.read(reinterpret_cast<char*>(&settings.impColors), sizeof(settings.impColors));
-	/*вывод информации об изображении
+	/*РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё РѕР± РёР·РѕР±СЂР°Р¶РµРЅРёРё
 	cout << "signature =" << settings.signature << endl;
 	cout << "fileSize =" << settings.fileSize << endl;
 	cout << "reserved =" << settings.reserved << endl;
@@ -48,7 +48,7 @@ void readParams(ifstream &os) {
 }
 
 void readIMG(ifstream &os) {
-	//считывание картинки и перенос в 1-мерный массив 
+	//СЃС‡РёС‚С‹РІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё Рё РїРµСЂРµРЅРѕСЃ РІ 1-РјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ 
 	IMG = new unsigned char[settings.lineImgSize];
 	char r = 0, g = 0, b = 0, x = 0;
 	for (int i = 0; i < settings.lineImgSize; i++) {
@@ -86,7 +86,7 @@ void writeParams(ofstream &os) {
 }
 
 void writeIMG(ofstream &os) {
-	//запись картинки в файл
+	//Р·Р°РїРёСЃСЊ РєР°СЂС‚РёРЅРєРё РІ С„Р°Р№Р»
 	for (int i = 0; i < settings.lineImgSize; i += color) {
 		os << IMG[i];
 		os << IMG[i + 1];
@@ -97,12 +97,12 @@ void writeIMG(ofstream &os) {
 }
 
 void coder(const char* baseImgName, const char* newImgName, const char* letter) {
-	//чтение картинки исходной
+	//С‡С‚РµРЅРёРµ РєР°СЂС‚РёРЅРєРё РёСЃС…РѕРґРЅРѕР№
 	std::ifstream in(baseImgName, std::ios::binary);
-	readParams(in); //cчитывание параметров
-	readIMG(in); //считывание картинки
+	readParams(in); //cС‡РёС‚С‹РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ
+	readIMG(in); //СЃС‡РёС‚С‹РІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё
 	in.close();
-	//кодирование сообщения
+	//РєРѕРґРёСЂРѕРІР°РЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
 	int i = 0;
 	int j = 0;
 	while (*(letter + i) != '\0') {
@@ -116,35 +116,35 @@ void coder(const char* baseImgName, const char* newImgName, const char* letter) 
 		i += 1;
 		j += 1;
 	}
-	//запись новой картинки
+	//Р·Р°РїРёСЃСЊ РЅРѕРІРѕР№ РєР°СЂС‚РёРЅРєРё
 	std::ofstream out(newImgName, std::ios::binary);
-	writeParams(out); //запись параметров
-	writeIMG(out); //запись картинки
+	writeParams(out); //Р·Р°РїРёСЃСЊ РїР°СЂР°РјРµС‚СЂРѕРІ
+	writeIMG(out); //Р·Р°РїРёСЃСЊ РєР°СЂС‚РёРЅРєРё
 	out.close();
 }
 
 void decoder(const char* baseImgName, const char* newImgName) {
 	setlocale(LC_ALL, "Russian");
 	unsigned char *orig;
-	//чтение картинки исходной
+	//С‡С‚РµРЅРёРµ РєР°СЂС‚РёРЅРєРё РёСЃС…РѕРґРЅРѕР№
 	std::ifstream inOrig(baseImgName, std::ios::binary);
-	readParams(inOrig); //cчитывание параметров
-	readIMG(inOrig); //считывание картинки
+	readParams(inOrig); //cС‡РёС‚С‹РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ
+	readIMG(inOrig); //СЃС‡РёС‚С‹РІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё
 	inOrig.close();
-	//копирование картинки
+	//РєРѕРїРёСЂРѕРІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё
 	orig = new unsigned char[settings.lineImgSize];
 	for (int i = 0; i < settings.lineImgSize; i++) {
 		orig[i] = IMG[i];
 	}
-	//открытие закодированной картинки
+	//РѕС‚РєСЂС‹С‚РёРµ Р·Р°РєРѕРґРёСЂРѕРІР°РЅРЅРѕР№ РєР°СЂС‚РёРЅРєРё
 	std::ifstream in(newImgName, std::ios::binary);
-	readParams(in); //cчитывание параметров
-	readIMG(in); //считывание картинки
+	readParams(in); //cС‡РёС‚С‹РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ
+	readIMG(in); //СЃС‡РёС‚С‹РІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё
 	in.close();
 	ofstream out("out.txt");
 	char st2[200000] = "";
 	char *p = st2;
-	//раскодировка картинки
+	//СЂР°СЃРєРѕРґРёСЂРѕРІРєР° РєР°СЂС‚РёРЅРєРё
 	for (int i = 0; i < settings.lineImgSize; i += color) {
 		unsigned char ab = (orig[i] ^ IMG[i]) << 5;
 		unsigned char ag = (orig[i + 1] ^ IMG[i + 1]) << 2;
@@ -154,3 +154,4 @@ void decoder(const char* baseImgName, const char* newImgName) {
 	}
 	out.close();
 }
+
