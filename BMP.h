@@ -11,8 +11,8 @@ void writeIMG(ofstream &os);
 void coder(const char* baseImgName, const char* newImgName, const char* letter);
 void decoder(const char* baseImgName, const char* newImgName);
 
-int color = 3; //Х кол-во цветов
-struct BMP/*различные параметры файла формата bmp*/{
+int color = 3;
+struct BMP/*СЂР°Р·Р»РёС‡РЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ С„Р°Р№Р»Р° С„РѕСЂРјР°С‚Р° bmp*/{
 	unsigned int imgWidth = 500, imgHeight = 500;
 	unsigned char signature[2] = { 'B', 'M' };
 	unsigned int fileSize = 14 + 40 + imgWidth * imgHeight * color;
